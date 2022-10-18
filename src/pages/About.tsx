@@ -18,15 +18,13 @@ export interface IAboutPageProps {}
 
 const AboutPage: React.FunctionComponent<IAboutPageProps> = (props) => {
    
-     /*fetch('https://gorest.co.in/public/v2/users', {
-        method: "GET",
-        headers: {'Content-Type': 'application/json', "Autorization": "Bearer 6081dadd2b21f733643640375445fe6f54f66b41ed2559adc816f2164073da7a"},
-        body: ({"name":"Freddy","email":"fredsetlo@gmail.com","gender":"female", "status":"active"}),
-    })
-        .then(response => response.json())
-        .then(res => console.log(res))
-           }*/
-    ///console.log(JSON.stringify(info));
+    const url = 'https://gorest.co.in/public/v2/users/';
+  let data = {"name":"Freddy","email":"fredsetlo@gmail.com","gender":"female", "status":"active"}
+  var request = new Request(url, {
+	method: 'GET',
+	//body: data,
+	headers: {'Content-Type': 'application/json', "Autorization": "Bearer 6081dadd2b21f733643640375445fe6f54f66b41ed2559adc816f2164073da7a"},
+});
 
   
   const [task, setTask] = useState<string>("");
@@ -56,7 +54,11 @@ const AboutPage: React.FunctionComponent<IAboutPageProps> = (props) => {
     );
   };
 
-  
+ useEffect(() => {
+    fetch(url)
+    .then(response => response.json())
+    .then(res => console.log(res))
+  }, [])
   return (
     <div className="App">
       <div className="header">
@@ -86,6 +88,8 @@ const AboutPage: React.FunctionComponent<IAboutPageProps> = (props) => {
     </div>
   );
 };
+
+
 
 
 
